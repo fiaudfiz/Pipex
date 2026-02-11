@@ -1,0 +1,11 @@
+total 68
+drwxrwxr-x 2 michel michel  4096 Feb  4 15:34 includes
+drwxrwxr-x 5 michel michel  4096 Feb  6 12:33 libft
+-rw-rw-r-- 1 michel michel  3206 Feb  6 09:28 Makefile
+drwxrwxr-x 2 michel michel  4096 Feb  6 12:33 objs
+-rw-rw-r-- 1 michel michel     0 Feb  6 12:35 out
+-rw-r--r-- 1 michel michel   491 Feb  6 12:34 outfile
+-rwxrwxr-x 1 michel michel 34944 Feb  6 12:33 pipex
+drwxrwxr-x 2 michel michel  4096 Feb  6 09:33 Ressources
+drwxrwxr-x 2 michel michel  4096 Feb  6 09:33 srcs
+-rwxrwxrwx 1 michel michel  2752 Feb  6 12:17 test.txt
