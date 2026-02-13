@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:16:56 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/13 11:38:28 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/13 13:55:04 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	msg_error(char *error)
 {
 	perror(error);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 void	msg_error_path(char *error, int fd, int tab_fd[2])
@@ -55,7 +55,7 @@ void	msg_error_fd(char *error, int fd[2])
 	if (fd)
 	{
 		close(fd[0]);
-		clsoe(fd[1]);
+		close(fd[1]);
 	}
 	perror(error);
 	exit(exit_status);
@@ -83,8 +83,23 @@ void	msg_error_cmd_path(char *error, int fd, int tab_fd[2], char **cmd_tab)
 		exit_status = 1;
 	close(fd);
 	close(tab_fd[0]);
-	clsoe(tab_fd[1]);
+	close(tab_fd[1]);
 	ft_free_str_tab(cmd_tab);
 	perror(error);
 	exit(exit_status);
+}
+void	msg_error_execve(char *error, char **cmd_tab, char *cmd_path)
+{
+	int	exit_code;
+
+	ft_free_str_tab(cmd_tab);
+	free(cmd_path);
+	if (errno == EACCES || errno ==  EISDIR)
+		exit_code = 126;
+	else if (errno == ENOENT)
+		exit_code = 127;
+	else
+		exit_code = 1;
+	perror(error);
+	exit(exit_code);
 }

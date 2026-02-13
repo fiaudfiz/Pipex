@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:19:01 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/13 11:45:37 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/13 18:50:12 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ char	*cmd_with_path(char **cmd_tab, char **envp, int fd, int tab_fd[2])
 	if (!path)
 		msg_error_path("Invalid Path", fd, tab_fd);
 	cmd_path = find_cmd_path(path, cmd_tab);
+	ft_free_str_tab(path);
 	if (!cmd_path || !cmd_tab[0])
 	{
-		free(path);
 		ft_free_str_tab(cmd_tab);
 		msg_error_cmd("Command not found", fd, tab_fd);
 		return (NULL);
@@ -91,6 +91,9 @@ void	first_son(char **av, char **envp, int *fd)
 	fd_in = open(av[1], O_RDONLY); //on ouvre le fichier
 	if (fd_in < 0)
 		msg_error_fd(av[1], fd);
+	dup2(fd_in, 0); //dup2(nouveau, ancien) donc STDIN est maintenant le fichier
+	dup2(fd[1], 1); //le STDOUT est maintenant l'entree du pipe
+	close_fd(fd, fd_in);
 	cmd_tab = ft_split(av[2], ' ');
 	if (check_arg(av[2]) == 1) // pas de /
 		cmd_path = cmd_with_path(cmd_tab, envp, fd_in, fd);
@@ -98,15 +101,11 @@ void	first_son(char **av, char **envp, int *fd)
 	{
 		cmd_path = ft_strdup(cmd_tab[0]);
 		if (!(access(cmd_path, F_OK | X_OK) == 0))
+		{
+			free (cmd_path);
 			msg_error_cmd_path("Command path is incorrect", fd_in, fd, cmd_tab);
+		}
 	}
-	dup2(fd_in, 0); //dup2(nouveau, ancien) donc STDIN est maintenant le fichier
-	dup2(fd[1], 1); //le STDOUT est maintenant l'entree du pipe
-	close_fd(fd, fd_in);
 	if (execve(cmd_path, cmd_tab, envp) == -1)
-	{
-		ft_free_str_tab(cmd_tab);
-		free(cmd_path);
-		msg_error("Execve");
-	}
+		msg_error_execve("Execve", cmd_tab, cmd_path);
 }
