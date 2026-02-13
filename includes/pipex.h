@@ -10,7 +10,7 @@
 # include "../libft/includes/libft.h"
 
 void	msg_error(char *error);
-void	msg_error_path(char *error);
+void	msg_error_path(char *error, int fd, int tab_fd[2]);
 char	**get_path(char **envp);
 char	*find_cmd_path(char **path, char **cmd_tab);
 void	first_son(char **av, char **envp, int *fd);
