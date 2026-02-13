@@ -1,0 +1,57 @@
+Quand la commande n'est pas correcte =  valgrind --track-fds=yes  ./pipex test.txt "cet" "cat"  outfile
+ affiche ceci : (le fichier est bien creer tout de meme donc c'est bon)
+
+ ==15030== Memcheck, a memory error detector
+==15030== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==15030== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==15030== Command: ./pipex test.txt cet cat outfile
+==15030== 
+Command not found: No such file or directory
+==15031== 
+==15031== FILE DESCRIPTORS: 5 open (3 std) at exit.
+==15031== Open file descriptor 4:
+==15031==    at 0x4974959: pipe (pipe.c:29)
+==15031==    by 0x109170: main (main.c:24)
+==15031== 
+==15031== Open file descriptor 3:
+==15031==    at 0x4974959: pipe (pipe.c:29)
+==15031==    by 0x109170: main (main.c:24)
+==15031== 
+==15031== 
+==15031== HEAP SUMMARY:
+==15031==     in use at exit: 360 bytes in 13 blocks
+==15031==   total heap usage: 44 allocs, 31 frees, 2,726 bytes allocated
+==15031== 
+==15031== LEAK SUMMARY:
+==15031==    definitely lost: 104 bytes in 1 blocks
+==15031==    indirectly lost: 256 bytes in 12 blocks
+==15031==      possibly lost: 0 bytes in 0 blocks
+==15031==    still reachable: 0 bytes in 0 blocks
+==15031==         suppressed: 0 bytes in 0 blocks
+==15031== Rerun with --leak-check=full to see details of leaked memory
+==15031== 
+==15031== For lists of detected and suppressed errors, rerun with: -s
+==15031== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==15030== 
+==15030== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==15030== 
+==15030== HEAP SUMMARY:
+==15030==     in use at exit: 0 bytes in 0 blocks
+==15030==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==15030== 
+==15030== All heap blocks were freed -- no leaks are possible
+==15030== 
+==15030== For lists of detected and suppressed errors, rerun with: -s
+==15030== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+quand le ficheir d'entree n'est pas bon mais que les commandes sont bonnes leaks mais le fichier de sortie est cree :
+quand la derneire commande n'est pas bonne le fichier n'est pas cree
+
+CODE ERREUR 127 etc non presents
+
+
+0	Succès	Tout s'est bien passé.
+1	Erreur générale	Erreur générique (division par zéro, erreur de syntaxe script, etc.).
+126	Commande non exécutable	Le fichier existe mais tu n'as pas les permissions (chmod +x manquant).
+127	Commande introuvable	Erreur de frappe, binaire absent ou problème de $PATH.
+128+n	Signal fatal	Ton programme a été tué par un signal (ex: 139 pour un Segmentation Fault).
