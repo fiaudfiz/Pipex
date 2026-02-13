@@ -6,7 +6,7 @@
 #    By: miouali <miouali@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/04 15:21:00 by miouali           #+#    #+#              #
-#    Updated: 2026/02/09 14:21:21 by miouali          ###   ########.fr        #
+#    Updated: 2026/02/13 18:18:55 by miouali          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBFT_DIR = libft/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
 
 SRCS_PIPEX = main.c handle_error.c utils.c second_son.c
-SRCS_BONUS_PIPEX = main_bonus.c handle_error.c utils.c
+SRCS_BONUS_PIPEX = main_bonus.c handle_error.c utils.c utils_bonus.c handle_error_bonus.c
 
 SRCS_MANDATORY_PATH = $(addprefix $(SRCS_DIR), $(SRCS_PIPEX))
 SRCS_BONUS_PATH = $(addprefix $(SRCS_DIR), $(SRCS_BONUS_PIPEX))

@@ -9,13 +9,14 @@ int	main(int ac, char **av, char **envp)
 	char	*cmd_path;
 	char	**cmd_tab;
 	int		fd_out;
+	int		status;
 
 	if (ac < 5)
 		return (0);
 	i = 2;
 	fd_prev = open(av[1], O_RDONLY);
 	if (fd_prev < 0)
-		msg_error(av[1]);
+		msg_error_fd(av[1], fd);
 	while (i < ac - 2)
 	{
 		if (pipe(fd) == -1)
@@ -28,50 +29,52 @@ int	main(int ac, char **av, char **envp)
 			close_fd(fd, fd_prev);
 			cmd_tab = ft_split(av[i], ' ');
 			if (check_arg(av[i]) == 1) // pas de /
-				cmd_path = cmd_with_path(cmd_tab, envp);
+				cmd_path = cmd_with_path_bonus(cmd_tab, envp);
 			else //chemin relatif
 			{
-				cmd_path = cmd_tab[0];
+				cmd_path = ft_strdup(cmd_tab[0]);
 				if (!(access(cmd_path, F_OK | X_OK) == 0))
-					msg_error("Command path is incorrect");
+				{
+					free (cmd_path);
+					msg_error_cmd_path_bonus("Command path is incorrect", cmd_tab);
+				}
 			}
 			if (execve(cmd_path, cmd_tab, envp) == -1)
-			{
-				ft_free_str_tab(cmd_tab);
-				free(cmd_path);
-				msg_error("Execve");
-			}
+				msg_error_execve("Execve", cmd_tab, cmd_path);
 		}
-		close (fd[1]);
-		close (fd_prev);
+		close(fd[1]);
+		close(fd_prev);
 		fd_prev = fd[0];
 		i++;
 	}
 	pid = fork();
 	if (pid == 0)
 	{
-		cmd_tab = ft_split(av[i], ' ');
-		if (check_arg(av[i]) == 1)
-			cmd_path = cmd_with_path(cmd_tab, envp);
-		else
-		{
-			cmd_path = cmd_tab[0];
-			if (!(access(cmd_path, F_OK | X_OK) == 0))
-				msg_error("Command path is incorrect");
-		}
 		fd_out = open(av[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd_out < 0)
-			msg_error(av[i + 1]);
+			msg_error_fd(av[i + 1], fd);
 		dup2(fd_prev, 0);
 		dup2(fd_out, 1);
-		close_fd(fd, fd_out);
-		if (execve(cmd_path, cmd_tab, envp) == -1)
+		close(fd_prev);
+        close(fd_out);
+		cmd_tab = ft_split(av[i], ' ');
+		if (check_arg(av[i]) == 1)
+			cmd_path = cmd_with_path_bonus(cmd_tab, envp);
+		else
 		{
-			ft_free_str_tab(cmd_tab);
-			free(cmd_path);
-			msg_error("Execve");
+			cmd_path = ft_strdup(cmd_tab[0]);
+			if (!(access(cmd_path, F_OK | X_OK) == 0))
+			{
+				free(cmd_path);
+				msg_error_cmd_path_bonus("Command path is incorrect", cmd_tab);
+			}
 		}
+		if (execve(cmd_path, cmd_tab, envp) == -1)
+			msg_error_execve("Execve", cmd_tab, cmd_path);
 	}
 	close(fd_prev); // Très important
-	while (wait(NULL) > 0);
+	while (wait(&status) > 0);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (0);
 }
