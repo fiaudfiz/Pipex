@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:19:01 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/14 11:22:30 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/14 11:40:51 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,27 +96,3 @@ void	close_fd(int *fd_pipe, int fd)
 	close (fd);
 }
 
-void	first_son(char **av, char **envp, int *fd)
-{
-	char	*cmd_path;
-	char	**cmd_tab;
-	int		fd_in;
-
-	fd_in = open(av[1], O_RDONLY); //on ouvre le fichier
-	if (fd_in < 0)
-		msg_error_fd(av[1], fd);
-	dup2(fd_in, 0); //dup2(nouveau, ancien) donc STDIN est maintenant le fichier
-	dup2(fd[1], 1); //le STDOUT est maintenant l'entree du pipe
-	close_fd(fd, fd_in);
-	cmd_tab = ft_split(av[2], ' ');
-	if (check_arg(av[2]) == 1) // pas de /
-		cmd_path = cmd_with_path(cmd_tab, envp);
-	else //chemin relatif
-	{
-		cmd_path = ft_strdup(cmd_tab[0]);
-		if (!(access(cmd_path, F_OK | X_OK) == 0))
-			msg_error_standart("Command path is incorrect", cmd_tab, cmd_path);
-	}
-	if (execve(cmd_path, cmd_tab, envp) == -1)
-		msg_error_standart("Execve", cmd_tab, cmd_path);
-}

@@ -6,7 +6,7 @@
 #    By: miouali <miouali@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/04 15:21:00 by miouali           #+#    #+#              #
-#    Updated: 2026/02/14 11:10:39 by miouali          ###   ########.fr        #
+#    Updated: 2026/02/14 11:40:48 by miouali          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ HEADER_DIR = includes/
 LIBFT_DIR = libft/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
 
-SRCS_PIPEX = main.c handle_error.c utils.c second_son.c
+SRCS_PIPEX = main.c handle_error.c utils.c sons.c
 SRCS_BONUS_PIPEX = main_bonus.c handle_error.c utils.c
 
 SRCS_MANDATORY_PATH = $(addprefix $(SRCS_DIR), $(SRCS_PIPEX))
