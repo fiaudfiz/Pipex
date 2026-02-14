@@ -21,5 +21,6 @@ void	msg_error(char *error);
 void	msg_error_cmd(char *error);
 void	msg_error_fd_bonus(char *error, int fd);
 void	msg_error_fd(char *error, int fd[2]);
+void	loop_sons(char *av, char **envp, int *fd, int fd_prev);
 
 #endif
