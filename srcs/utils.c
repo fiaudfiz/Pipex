@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:19:01 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/14 11:05:58 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/14 11:22:30 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ char	*cmd_with_path(char **cmd_tab, char **envp)
 
 	path = get_path(envp);
 	if (!path)
-		msg_error_path_bonus("Invalid Path");
+		msg_error_cmd("Invalid Path");
 	cmd_path = find_cmd_path(path, cmd_tab);
 	ft_free_str_tab(path);
 	if (!cmd_path || !cmd_tab[0])
 	{
 		ft_free_str_tab(cmd_tab);
-		msg_error_cmd_bonus("Command not found");
+		msg_error_cmd("Command not found");
 		return (NULL);
 	}
 	return (cmd_path);
@@ -115,11 +115,8 @@ void	first_son(char **av, char **envp, int *fd)
 	{
 		cmd_path = ft_strdup(cmd_tab[0]);
 		if (!(access(cmd_path, F_OK | X_OK) == 0))
-		{
-			free (cmd_path);
-			msg_error_cmd_path_bonus("Command path is incorrect", cmd_tab);
-		}
+			msg_error_standart("Command path is incorrect", cmd_tab, cmd_path);
 	}
 	if (execve(cmd_path, cmd_tab, envp) == -1)
-		msg_error_execve("Execve", cmd_tab, cmd_path);
+		msg_error_standart("Execve", cmd_tab, cmd_path);
 }

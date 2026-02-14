@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:50:53 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/14 11:04:24 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/14 11:22:38 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,8 @@ void	second_son(char **av, char **envp, int *fd)
 	{
 		cmd_path = ft_strdup(cmd_tab[0]);
 		if (!(access(cmd_path, F_OK | X_OK) == 0))
-		{
-			free(cmd_path);
-			msg_error_cmd_path_bonus("Command path is incorrect", cmd_tab);
-		}
+			msg_error_standart("Command path is incorrect", cmd_tab, cmd_path);
 	}
 	if (execve(cmd_path, cmd_tab, envp) == -1)
-		msg_error_execve("Execve", cmd_tab, cmd_path);
+		msg_error_standart("Execve", cmd_tab, cmd_path);
 }

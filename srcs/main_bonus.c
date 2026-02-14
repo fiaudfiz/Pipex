@@ -34,13 +34,10 @@ int	main(int ac, char **av, char **envp)
 			{
 				cmd_path = ft_strdup(cmd_tab[0]);
 				if (!(access(cmd_path, F_OK | X_OK) == 0))
-				{
-					free (cmd_path);
-					msg_error_cmd_path_bonus("Command path is incorrect", cmd_tab);
-				}
+					msg_error_standart("Command path is incorrect", cmd_tab, cmd_path);
 			}
 			if (execve(cmd_path, cmd_tab, envp) == -1)
-				msg_error_execve("Execve", cmd_tab, cmd_path);
+				msg_error_standart("Execve", cmd_tab, cmd_path);
 		}
 		close(fd[1]);
 		close(fd_prev);
@@ -64,13 +61,10 @@ int	main(int ac, char **av, char **envp)
 		{
 			cmd_path = ft_strdup(cmd_tab[0]);
 			if (!(access(cmd_path, F_OK | X_OK) == 0))
-			{
-				free(cmd_path);
-				msg_error_cmd_path_bonus("Command path is incorrect", cmd_tab);
-			}
+				msg_error_standart("Command path is incorrect", cmd_tab, cmd_path);
 		}
 		if (execve(cmd_path, cmd_tab, envp) == -1)
-			msg_error_execve("Execve", cmd_tab, cmd_path);
+			msg_error_standart("Execve", cmd_tab, cmd_path);
 	}
 	close(fd_prev); // Très important
 	while (wait(&status) > 0);
