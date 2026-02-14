@@ -16,7 +16,7 @@ int	main(int ac, char **av, char **envp)
 	i = 2;
 	fd_prev = open(av[1], O_RDONLY);
 	if (fd_prev < 0)
-		msg_error_fd(av[1], fd);
+		msg_error(av[1]);
 	while (i < ac - 2)
 	{
 		if (pipe(fd) == -1)
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **envp)
 			close_fd(fd, fd_prev);
 			cmd_tab = ft_split(av[i], ' ');
 			if (check_arg(av[i]) == 1) // pas de /
-				cmd_path = cmd_with_path_bonus(cmd_tab, envp);
+				cmd_path = cmd_with_path(cmd_tab, envp);
 			else //chemin relatif
 			{
 				cmd_path = ft_strdup(cmd_tab[0]);
@@ -52,14 +52,14 @@ int	main(int ac, char **av, char **envp)
 	{
 		fd_out = open(av[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd_out < 0)
-			msg_error_fd(av[i + 1], fd);
+			msg_error_fd_bonus(av[i + 1], fd[0]);
 		dup2(fd_prev, 0);
 		dup2(fd_out, 1);
 		close(fd_prev);
         close(fd_out);
 		cmd_tab = ft_split(av[i], ' ');
 		if (check_arg(av[i]) == 1)
-			cmd_path = cmd_with_path_bonus(cmd_tab, envp);
+			cmd_path = cmd_with_path(cmd_tab, envp);
 		else
 		{
 			cmd_path = ft_strdup(cmd_tab[0]);

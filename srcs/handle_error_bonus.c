@@ -27,3 +27,10 @@ void	msg_error_cmd_bonus(char *error)
 	ft_putendl_fd(error, 2);
 	exit(127);
 }
+
+void	msg_error_fd_bonus(char *error, int fd)
+{
+	close(fd);
+	perror(error);
+	exit(1);
+}
