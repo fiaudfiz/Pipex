@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:16:56 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/14 11:21:04 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/15 11:39:49 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	msg_error_fd(char *error, int fd[2])
 	exit(1);
 }
 
-void	msg_error_standart(char *error, char **cmd_tab, char *cmd_path)
+void	msg_error_std(char *error, char **cmd_tab, char *cmd_path)
 {
 	int	exit_code;
 
 	ft_free_str_tab(cmd_tab);
 	free(cmd_path);
-	if (errno == EACCES || errno ==  EISDIR)
+	if (errno == EACCES || errno == EISDIR)
 		exit_code = 126;
 	else if (errno == ENOENT)
 		exit_code = 127;

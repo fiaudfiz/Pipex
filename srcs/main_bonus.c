@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miouali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 11:28:44 by miouali           #+#    #+#             */
+/*   Updated: 2026/02/15 11:30:53 by miouali          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int	main(int ac, char **av, char **envp)
 {
-	int	fd_prev;
+	int		fd_prev;
 	int		fd[2];
 	int		fd_out;
 	int		status;
@@ -17,9 +29,10 @@ int	main(int ac, char **av, char **envp)
 		msg_error_fd_bonus(av[ac - 1], fd_prev);
 	fd_prev = loop_sons(av, fd_prev, fd, envp);
 	last_son(fd_prev, fd_out, envp, av[ac - 2]);
-	close(fd_prev); // Très important
+	close(fd_prev);
 	close (fd_out);
-	while (wait(&status) > 0);
+	while (wait(&status) > 0)
+		;
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (0);

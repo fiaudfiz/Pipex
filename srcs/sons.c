@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:50:53 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/14 11:54:22 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/15 11:35:52 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	second_son(char **av, char **envp, int *fd)
 	{
 		cmd_path = ft_strdup(cmd_tab[0]);
 		if (!(access(cmd_path, F_OK | X_OK) == 0))
-			msg_error_standart("Command path is incorrect", cmd_tab, cmd_path);
+			msg_error_std("Command path is incorrect", cmd_tab, cmd_path);
 	}
 	if (execve(cmd_path, cmd_tab, envp) == -1)
-		msg_error_standart("Execve", cmd_tab, cmd_path);
+		msg_error_std("Execve", cmd_tab, cmd_path);
 }
 
 void	first_son(char **av, char **envp, int *fd)
@@ -44,21 +44,21 @@ void	first_son(char **av, char **envp, int *fd)
 	char	**cmd_tab;
 	int		fd_in;
 
-	fd_in = open(av[1], O_RDONLY); //on ouvre le fichier
+	fd_in = open(av[1], O_RDONLY);
 	if (fd_in < 0)
 		msg_error_fd(av[1], fd);
-	dup2(fd_in, 0); //dup2(nouveau, ancien) donc STDIN est maintenant le fichier
-	dup2(fd[1], 1); //le STDOUT est maintenant l'entree du pipe
+	dup2(fd_in, 0);
+	dup2(fd[1], 1);
 	close_fd(fd, fd_in);
 	cmd_tab = ft_split(av[2], ' ');
-	if (check_arg(av[2]) == 1) // pas de /
+	if (check_arg(av[2]) == 1)
 		cmd_path = cmd_with_path(cmd_tab, envp);
-	else //chemin relatif
+	else
 	{
 		cmd_path = ft_strdup(cmd_tab[0]);
 		if (!(access(cmd_path, F_OK | X_OK) == 0))
-			msg_error_standart("Command path is incorrect", cmd_tab, cmd_path);
+			msg_error_std("Command path is incorrect", cmd_tab, cmd_path);
 	}
 	if (execve(cmd_path, cmd_tab, envp) == -1)
-		msg_error_standart("Execve", cmd_tab, cmd_path);
+		msg_error_std("Execve", cmd_tab, cmd_path);
 }

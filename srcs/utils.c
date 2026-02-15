@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:19:01 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/14 11:40:51 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/15 11:28:36 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,3 @@ void	close_fd(int *fd_pipe, int fd)
 	close(fd_pipe[1]);
 	close (fd);
 }
-
