@@ -21,6 +21,8 @@ void	msg_error(char *error);
 void	msg_error_cmd(char *error);
 void	msg_error_fd_bonus(char *error, int fd);
 void	msg_error_fd(char *error, int fd[2]);
-void	loop_sons(char *av, char **envp, int *fd, int fd_prev);
+void	fork_sons(char *av, char **envp, int *fd, int fd_prev);
+int	loop_sons(char **av, int fd_prev, int *fd, char **envp);
+void	last_son(int fd_prev, int fd_out, char  **envp, char *av);
 
 #endif
