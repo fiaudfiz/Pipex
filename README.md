@@ -19,8 +19,9 @@ This project introduces several core Unix concepts and system calls:
     pipe: Creating a unidirectional data channel (a "tunnel") between processes to pass data from one command to another.
 
 ## Project Structure
+This repository includes a submodule for my personal C library, [Libft](https://github.com/fiaudfiz/libft).
 
-In this project, you will find all the sources for a good execution, and a submodule called libft, which is the repo : https://github.com/fiaudfiz/libft . This is my own librairie to help for execution.In this project, the part mandatory and the bonus part is separated : the mandatory part is to use only 2 command, and the bonus is the handle n-command.
+In this project, the part mandatory and the bonus part is separated : the mandatory part is to use only 2 command, and the bonus is the handle n-command.
 The equivalence in shell is this command:
 ```bash
 < file1 cmd1 | cmd2 > file2
