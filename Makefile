@@ -16,6 +16,9 @@ DEF_COLOR = \033[0;39m
 CYAN    = \033[0;96m
 GREEN = \033[0;92m
 PURPLE  = \033[0;95m
+YELLOW  = \033[0;93m
+RED     = \033[0;91m
+RESET   = \033[0m
 
 ERR_LOG = .errors.log 
 
