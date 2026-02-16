@@ -55,6 +55,6 @@ Execute with two commands:
       ./pipex infile "ls -l" "wc -l" outfile
 ```
   -for bonus :\
-    ```bash
+ ```bash
     ./pipex infile "cmd1" "cmd2" "cmd3' ... "cmdN" outfile
-    ```
+```
