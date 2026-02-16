@@ -21,32 +21,40 @@ This project introduces several core Unix concepts and system calls:
 ## Project Structure
 This repository includes a submodule for my personal C library, [Libft](https://github.com/fiaudfiz/libft).
 
-In this project, the part mandatory and the bonus part is separated : the mandatory part is to use only 2 command, and the bonus is the handle n-command.
-The equivalence in shell is this command:
+The project is divided into two parts:
+    -Mandatory: Handling two commands and two files.
+    -Bonus: Handling multiple pipes (n-commands) and here_doc support (no handled for now).
+    
+Shell Equivalence
+
+The behavior of the program is identical to the following shell command:
 ```bash
 < file1 cmd1 | cmd2 > file2
 ```
-## Set-up
+## Installation & Setup
 
-To set-up this project, no need to clone my repo libft in this repo, I have made a submodule so, you just have to do this command :
+Since this project uses a submodule, you must clone the repository recursively to include the libft source code:
 ```bash
-git clone --recursive git@github.com:fiaudfiz/pipex
+git clone --recursive git@github.com:fiaudfiz/pipex.git
 ```
-Then, you can enter in the folder pipex and compiling the project :
+### Compilation
+
+To compile the mandatory part:
 ```bash
 make
 ```
-or 
+To compile the bonus part (multiple pipes) : 
 ```bash
 make bonus
 ```
-
-You can now execute this project : \
+ ## Usage
+Mandatory Part
+Execute with two commands:
   -for mandatory:
   ```bash
-      ./pipex file1 cmd1 cmd2 file2
+      ./pipex infile "ls -l" "wc -l" outfile
 ```
   -for bonus :
     ```bash
-    ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+    ./pipex infile "cmd1" "cmd2" "cmd3' ... "cmdN" outfile
     ```
