@@ -49,7 +49,7 @@ make bonus
 ```
  ## Usage
 Mandatory Part
-Execute with two commands:
+Execute with two commands:\
   -for mandatory:
   ```bash
       ./pipex infile "ls -l" "wc -l" outfile
