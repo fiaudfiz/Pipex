@@ -16,7 +16,10 @@ In this project, there are some differents new notions/functions in C :
 ## Project Structure
 
 In this project, you will find all the sources for a good execution, and a submodule called libft, which is the repo : https://github.com/fiaudfiz/libft . This is my own librairie to help for execution.In this project, the part mandatory and the bonus part is separated : the mandatory part is to use only 2 command, and the bonus is the handle n-command.
-
+The equivalence in shell is this command:
+```bash
+< file1 cmd1 | cmd2 > file2
+```
 ## Set-up
 
 To set-up this project, no need to clone my repo libft in this repo, I have made a submodule so, you just have to do this command :
@@ -37,4 +40,7 @@ You can now execute this project : \
   ```bash
       ./pipex file1 cmd1 cmd2 file2
 ```
-  -
+  -for bonus :
+    ```bash
+    ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+    ```
