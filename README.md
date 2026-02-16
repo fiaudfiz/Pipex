@@ -32,7 +32,7 @@ or
 make bonus
 ```
 
-You can now execute this project :
+You can now execute this project : \
   -for mandatory:
   ```bash
       ./pipex file1 cmd1 cmd2 file2
