@@ -1,17 +1,22 @@
 # Pipex - @42
 
-Reimplementation du mecanisme des pipes Unix en C.
+A C implementation of the Unix pipe mechanism.
 
 ---
 
 ## Description
 
-this project has been made in the 42's curriculum by me, the principe is to make the same system as the Unix pipe to execute multiples commandes on a file or on the terminal.
-In this project, there are some differents new notions/functions in C : 
--the notion son/father : the program father use the function fork to creeate a independant son which execute one of the command asked.
--the function execve : this function is executed in a son to found in the PATH the command shell to execute.
--the function dup2 : this fonction is used for create somne redirections to STDIN or STDOUT.
--the function pipe : this function allow us to create a new pipe which is a tunnel beetween commands to send the result of cmd1 to entry of cmd2 for exemple.
+This project was developed as part of the 42 school curriculum. The objective is to replicate the behavior of the Unix pipe (|) to execute multiple commands, redirecting the output of one to the input of the next.
+
+This project introduces several core Unix concepts and system calls:
+
+    Parent/Child Processes: Using fork() to create independent child processes that execute commands simultaneously.
+
+    execve: Searching and executing binary commands using the system's PATH.
+
+    dup2: Handling file descriptor redirections to manage STDIN and STDOUT.
+
+    pipe: Creating a unidirectional data channel (a "tunnel") between processes to pass data from one command to another.
 
 ## Project Structure
 
