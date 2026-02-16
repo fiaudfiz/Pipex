@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miouali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 11:28:44 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/15 11:30:53 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/16 18:54:32 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	main(int ac, char **av, char **envp)
 	fd_prev = open(av[1], O_RDONLY);
 	if (fd_prev < 0)
 		msg_error(av[1]);
+	fd_prev = loop_sons(av, fd_prev, fd, envp);
 	fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_out < 0)
 		msg_error_fd_bonus(av[ac - 1], fd_prev);
-	fd_prev = loop_sons(av, fd_prev, fd, envp);
 	last_son(fd_prev, fd_out, envp, av[ac - 2]);
-	close(fd_prev);
+	if (fd_prev != -1)
+		close(fd_prev);
 	close (fd_out);
 	while (wait(&status) > 0)
 		;

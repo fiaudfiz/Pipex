@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:50:53 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/15 11:35:52 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/16 19:21:54 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	second_son(char **av, char **envp, int *fd)
 
 	fd_out = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_out < 0)
+	{
 		msg_error_fd(av[4], fd);
+		exit(1);
+	}
 	dup2(fd[0], 0);
 	dup2(fd_out, 1);
 	close_fd(fd, fd_out);
@@ -46,7 +49,10 @@ void	first_son(char **av, char **envp, int *fd)
 
 	fd_in = open(av[1], O_RDONLY);
 	if (fd_in < 0)
+	{
 		msg_error_fd(av[1], fd);
+		exit(1);
+	}
 	dup2(fd_in, 0);
 	dup2(fd[1], 1);
 	close_fd(fd, fd_in);

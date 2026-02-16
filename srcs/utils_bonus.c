@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 11:31:32 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/15 11:38:48 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/16 20:18:44 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	fork_sons(char *av, char **envp, int *fd, int fd_prev)
 	char	**cmd_tab;
 	char	*cmd_path;
 
+	if (fd_prev == -1)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		exit(1);
+	}
 	dup2(fd_prev, 0);
 	dup2(fd[1], 1);
 	close_fd(fd, fd_prev);
@@ -52,7 +58,8 @@ int	loop_sons(char **av, int fd_prev, int *fd, char **envp)
 		if (pid == 0)
 			fork_sons(av[i], envp, fd, fd_prev);
 		close(fd[1]);
-		close(fd_prev);
+		if(fd_prev >= 0)
+			close(fd_prev);
 		fd_prev = fd[0];
 		i++;
 	}
@@ -68,6 +75,12 @@ void	last_son(int fd_prev, int fd_out, char **envp, char *av)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (fd_prev == -1)
+		{
+			close(fd_prev);
+			close(fd_out);
+			exit(1);
+		}
 		dup2(fd_prev, 0);
 		dup2(fd_out, 1);
 		close(fd_prev);
