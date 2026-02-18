@@ -15,6 +15,7 @@
 void	msg_error(char *error)
 {
 	perror(error);
+	exit(1);
 }
 
 void	msg_error_fd(char *error, int fd[2])
@@ -53,7 +54,26 @@ void	msg_error_cmd(char *error)
 
 void	msg_error_fd_bonus(char *error, int fd)
 {
-	close(fd);
+	if (fd)
+		close(fd);
 	perror(error);
 	exit(1);
+}
+
+void	error_exit_parent(char *error, int fd_prev, int *fd)
+{
+	perror(error);
+	if (fd_prev != -1)
+		close(fd_prev);
+	if (fd)
+	{
+		close(fd[0]);
+		close(fd[1]);
+	}
+	exit(1);
+}
+void	msg_error_fd_out(void)
+{
+	ft_putstr_fd("out: Permission denied\n", 2);
+	exit (1);
 }

@@ -35,6 +35,8 @@ void	msg_error_fd_bonus(char *error, int fd);
 void	msg_error_fd(char *error, int fd[2]);
 void	fork_sons(char *av, char **envp, int *fd, int fd_prev);
 int		loop_sons(char **av, int fd_prev, int *fd, char **envp);
-void	last_son(int fd_prev, int fd_out, char **envp, char *av);
+int	    last_son(int fd_prev, int fd_out, char **envp, char *av);
+void	error_exit_parent(char *error, int fd_prev, int *fd);
+void	msg_error_fd_out(void);
 
 #endif
