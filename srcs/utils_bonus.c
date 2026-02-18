@@ -13,7 +13,7 @@
 #include "pipex.h"
 #include "../libft/includes/libft.h"
 
-void	fork_sons(char *av, char **envp, int *fd, int fd_prev)
+/*void	fork_sons(char *av, char **envp, int *fd, int fd_prev)
 {
 	char	**cmd_tab;
 	char	*cmd_path;
@@ -99,3 +99,4 @@ int	last_son(int fd_prev, int fd_out, char **envp, char *av)
 	}
 	return (pid);
 }
+*/

@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	msg_error(char *error)
+/*void	msg_error(char *error)
 {
 	perror(error);
 	exit(1);
@@ -76,4 +76,4 @@ void	msg_error_fd_out(void)
 {
 	ft_putstr_fd("out: Permission denied\n", 2);
 	exit (1);
-}
+}*/

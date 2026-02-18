@@ -13,7 +13,7 @@
 #include "pipex.h"
 #include "../libft/includes/libft.h"
 
-int	check_arg(char *cmd)
+/*int	check_arg(char *cmd)
 {
 	int	i;
 
@@ -87,7 +87,7 @@ char	*cmd_with_path(char **cmd_tab, char **envp)
 		return (NULL);
 	}
 	return (cmd_path);
-}
+}*/
 
 void	close_fd(int *fd_pipe, int fd)
 {

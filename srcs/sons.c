@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+/*#include "pipex.h"
 #include "../libft/includes/libft.h"
 
 void	second_son(char **av, char **envp, int *fd)
@@ -68,3 +68,4 @@ void	first_son(char **av, char **envp, int *fd)
 	if (execve(cmd_path, cmd_tab, envp) == -1)
 		msg_error_std("Execve", cmd_tab, cmd_path);
 }
+*/
