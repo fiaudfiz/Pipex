@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:12:22 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/19 14:44:36 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/19 17:25:30 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	pipex;
 
 	if (ac != 5)
-		return (0);
+		return (1);
 	ft_memset(&pipex, 0, sizeof(t_pipex));
 	struct_init(av, ac, &pipex, envp);
 	loop_sons_struct(&pipex);
