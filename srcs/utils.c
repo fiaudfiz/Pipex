@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miouali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/06 14:19:01 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/16 20:20:03 by miouali          ###   ########.fr       */
+/*   Created: 2026/02/19 14:54:43 by miouali           #+#    #+#             */
+/*   Updated: 2026/02/19 14:55:39 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "../libft/includes/libft.h"
 
-/*int	check_arg(char *cmd)
+int	check_arg(char *cmd)
 {
 	int	i;
 
@@ -43,6 +43,8 @@ char	**get_path(char **envp)
 	temp = envp[i];
 	i = ft_strlen(temp);
 	temp = ft_substr(temp, 5, i - 5);
+	if (!temp)
+		return (NULL);
 	path_tab = ft_split(temp, ':');
 	free(temp);
 	return (path_tab);
@@ -61,7 +63,11 @@ char	*find_cmd_path(char **path, char **cmd_tab)
 	while (path[i])
 	{
 		temp = ft_strjoin(path[i], "/");
+		if (!temp)
+			return (NULL);
 		temp = ft_strjoin_free(temp, cmd_tab[0], 1);
+		if (!temp)
+			return (NULL);
 		if (access(temp, F_OK | X_OK) == 0)
 			return (temp);
 		free(temp);
@@ -70,28 +76,17 @@ char	*find_cmd_path(char **path, char **cmd_tab)
 	return (NULL);
 }
 
-char	*cmd_with_path(char **cmd_tab, char **envp)
+char	*cmd_with_path(t_pipex *pipex)
 {
-	char	**path;
-	char	*cmd_path;
-
-	path = get_path(envp);
-	if (!path)
-		msg_error_cmd("Invalid Path");
-	cmd_path = find_cmd_path(path, cmd_tab);
-	ft_free_str_tab(path);
-	if (!cmd_path || !cmd_tab[0])
+	pipex->path = get_path(pipex->envp);
+	if (!pipex->path)
+		return (NULL);
+	pipex->cmd_path2 = find_cmd_path(pipex->path, pipex->cmd_tab);
+	ft_free_str_tab(pipex->path);
+	if (!pipex->cmd_tab || !pipex->cmd_tab[0])
 	{
-		ft_free_str_tab(cmd_tab);
-		msg_error_cmd("Command not found");
+		error_struct(pipex, "Command not found", 127);
 		return (NULL);
 	}
-	return (cmd_path);
-}*/
-
-void	close_fd(int *fd_pipe, int fd)
-{
-	close(fd_pipe[0]);
-	close(fd_pipe[1]);
-	close (fd);
+	return (pipex->cmd_path2);
 }

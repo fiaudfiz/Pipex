@@ -6,7 +6,7 @@
 /*   By: miouali <miouali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 14:12:22 by miouali           #+#    #+#             */
-/*   Updated: 2026/02/15 11:36:57 by miouali          ###   ########.fr       */
+/*   Updated: 2026/02/19 14:44:36 by miouali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	pid_t	pid1;
-	pid_t	pid2;
-	int		status;
-	int		fd[2];
+	t_pipex	pipex;
 
-	if (ac < 5)
+	if (ac != 5)
 		return (0);
-	if (pipe(fd) == -1)
-		msg_error("Pipe");
-	pid1 = fork();
-	if (pid1 == 0)
-		first_son(av, envp, fd);
-	pid2 = fork();
-	if (pid2 == 0)
-		second_son(av, envp, fd);
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (0);
+	ft_memset(&pipex, 0, sizeof(t_pipex));
+	struct_init(av, ac, &pipex, envp);
+	loop_sons_struct(&pipex);
+	pipex.last_pid = last_son_struct(&pipex);
+	if (pipex.fd_prev != -1)
+		close(pipex.fd_prev);
+	if (pipex.fd_out != -1)
+		close (pipex.fd_out);
+	waitpid(pipex.last_pid, &pipex.status, 0);
+	while (wait(NULL) > 0)
+		;
+	if (pipex.fd_out == -1)
+		pipex.exit_code = 1;
+	else if (WIFEXITED(pipex.status))
+		pipex.exit_code = WEXITSTATUS(pipex.status);
+	else
+		pipex.exit_code = 0;
+	return (pipex.exit_code);
 }

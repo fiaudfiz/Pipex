@@ -33,8 +33,8 @@ HEADER_DIR = includes/
 LIBFT_DIR = libft/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
 
-SRCS_PIPEX = main_bonus_struct.c utils_bonus_struct.c
-SRCS_BONUS_PIPEX = main_bonus.c handle_error.c utils.c utils_bonus.c
+SRCS_PIPEX = utils.c main.c handle_sons.c struct_init.c handle_error.c
+SRCS_BONUS_PIPEX = main_bonus_struct.c utils.c handle_sons.c struct_init_bonus.c handle_error.c here_doc.c
 
 SRCS_MANDATORY_PATH = $(addprefix $(SRCS_DIR), $(SRCS_PIPEX))
 SRCS_BONUS_PATH = $(addprefix $(SRCS_DIR), $(SRCS_BONUS_PIPEX))
