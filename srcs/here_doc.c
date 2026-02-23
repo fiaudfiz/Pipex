@@ -48,6 +48,7 @@ int	handle_here_doc(char *limiter)
 		if (execute_here_doc(fd_here_doc, lim_nl) == 1)
 			break ;
 	}
+	get_next_line(-1);
 	free(lim_nl);
 	close(fd_here_doc[1]);
 	return (fd_here_doc[0]);
