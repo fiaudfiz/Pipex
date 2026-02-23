@@ -24,6 +24,7 @@ ERR_LOG = .errors.log
 
 CC = cc
 CFLAGS = -O3 -Wall -Werror -Wextra -Wall -g -I includes -I libft/includes
+DFLAGS = -fsanitize=address -fsanitize=undefined -g -Wshadow
 
 #Dossiers
 SRCS_DIR = srcs/
@@ -53,6 +54,14 @@ header:
 
 start_timer:
 	$(eval START_TIME := $(shell date +%s))
+
+debug: $(LIBFT_LIB) header start_timer $(OBJS) end_timer
+	@$(CC) $(CFLAGS) $(DFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	@echo "$(GREEN) Pipex debug ready !$(DEF_COLOR)"
+
+debug_bonus: $(LIBFT_LIB) $(OBJS_BONUS)
+	@$(CC) $(CFLAGS) $(DFLAGS) $(OBJS_BONUS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	@echo "$(GREEN) Pipex bonus debug ready !$(DEF_COLOR)"
 
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
@@ -109,4 +118,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re debug debug_bonus
