@@ -6,7 +6,7 @@
 #    By: miouali <miouali@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/04 15:21:00 by miouali           #+#    #+#              #
-#    Updated: 2026/02/14 12:13:21 by miouali          ###   ########.fr        #
+#    Updated: 2026/02/23 22:11:49 by miouali          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RESET   = \033[0m
 ERR_LOG = .errors.log 
 
 CC = cc
-CFLAGS = -O3 -Wall -Werror -Wextra -Wall -g -I includes -I libft/includes
+CFLAGS = -O3 -Wall -Werror -Wextra -Wall -I includes -I libft/includes
 DFLAGS = -fsanitize=address -fsanitize=undefined -g -Wshadow
 
 #Dossiers
