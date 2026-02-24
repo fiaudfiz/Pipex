@@ -66,10 +66,29 @@ debug_bonus: $(LIBFT_LIB) $(OBJS_BONUS)
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS) $(LIBFT_LIB)
-	@rm -f .bonus
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
-	@echo "\n\n$(GREEN) Pipex is ready to be used !$(DEF_COLOR)"
+$(NAME): $(OBJS) $(LIBFT_LIB)                                                                       
+		@printf "\n\n$(CYAN)8 888888888o    8 8888 8 888888888o   8 8888888888   \`8.\`8888.      ,8'\n"
+		@sleep 0.1
+		@printf "8 8888    \`88.  8 8888 8 8888    \`88. 8 8888          \`8.\`8888.    ,8'\n"
+		@sleep 0.1
+		@printf "8 8888     \`88  8 8888 8 8888     \`88 8 8888           \`8.\`8888.  ,8'\n"
+		@sleep 0.1
+		@printf "8 8888     ,88  8 8888 8 8888     ,88 8 8888            \`8.\`8888.,8'\n"
+		@sleep 0.1
+		@printf "8 8888.   ,88'  8 8888 8 8888.   ,88' 8 888888888888     \`8.\`88888'\n"
+		@sleep 0.1
+		@printf "8 888888888P'   8 8888 8 888888888P'  8 8888             .88.\`8888.\n"
+		@sleep 0.1
+		@printf "8 8888          8 8888 8 8888         8 8888            .8'\`8.\`8888.\n"
+		@sleep 0.1
+		@printf "8 8888          8 8888 8 8888         8 8888           .8'  \`8.\`8888.\n"
+		@sleep 0.1
+		@printf "8 8888          8 8888 8 8888         8 8888          .8'    \`8.\`8888.\n"
+		@sleep 0.1
+		@printf "8 8888          8 8888 8 8888         8 888888888888 .8'      \`8.\`8888.\n$(DEF_COLOR)"
+		@rm -f .bonus
+		@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+		@echo "\n\n$(GREEN) Pipex is ready to be used !$(DEF_COLOR)"
 
 bonus : .bonus
 	
