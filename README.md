@@ -6,7 +6,7 @@ A C implementation of the Unix pipe mechanism.
 
 ## Description
 
-This project was developed as part of the 42 school curriculum. The objective is to replicate the behavior of the Unix pipe (|) to execute multiple commands, redirecting the output of one to the input of the next.
+This project was developed as part of the 42 school curriculum. The objective is to replicate the behavior of the Unix [pipe](https://github.com/fiaudfiz/Cours/blob/main/Pipex/Pipe%20(Tube).md) (|) to execute multiple commands, redirecting the output of one to the input of the next.
 
 This project introduces several core Unix concepts and system calls:
 
@@ -16,7 +16,7 @@ This project introduces several core Unix concepts and system calls:
 
     dup2: Handling file descriptor redirections to manage STDIN and STDOUT.
 
-    pipe: Creating a unidirectional data channel (a "tunnel") between processes to pass data from one command to another.
+    pipe: Creating a unidirectional data channel between processes to pass data from one command to another.
 
 ## Project Structure
 This repository includes a submodule for my personal C library, [Libft](https://github.com/fiaudfiz/libft).
